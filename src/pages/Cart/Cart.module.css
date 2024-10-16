@@ -1,0 +1,46 @@
+.container {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px;
+}
+
+.grid {
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  list-style: none;
+  gap: 8px;
+}
+
+.card {
+  border: 1px solid gray;
+  display: flex;
+  gap: 1rem;
+  border-radius: 4px;
+}
+
+.img {
+  height: 150px;
+  width: 150px;
+  cursor: pointer;
+}
+
+.cardInfo {
+  padding: 4px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex: 1;
+}
+
+.cardTitle {
+  font-size: 1.5rem;
+  flex: 1;
+  align-self: flex-start;
+}
+
+.total {
+  text-align: end;
+}
