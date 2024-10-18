@@ -1,3 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap');
+
+:root {
+  --primary-color: #ba3737;
+  --primary-hover-color: #9b1d1d;
+  --text-on-primary-color: #fefdfd;
+  --text-color: #070707;
+  --background-color: #fefdfd;
+  --gray-color: #949494;
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-family: 'Montserrat', sans-serif; /* Применяем шрифт к всему приложению */
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  max-width: 1280px;
+  box-sizing: border-box;
+}
+
 #root {
   position: fixed;
   top: 0;

@@ -20,3 +20,10 @@ export { cartActions, categoryActions, mealActions } from './slices';
 
 export const selectTotal = (state: RootState) =>
   state.cart.meals.reduce((total, item) => total + item.price * item.count, 0);
+
+const MAX_DISPLAY_COUNT = 99;
+export const selectCount = (state: RootState) => {
+  const count =
+    state.cart.meals.reduce((total, item) => total + item.count, 0) ?? 0;
+  return Math.min(count, MAX_DISPLAY_COUNT);
+};

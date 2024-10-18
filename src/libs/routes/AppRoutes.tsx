@@ -1,7 +1,7 @@
 import { createBrowserRouter, RouteObject } from 'react-router-dom';
-import { AppRoute } from '../../constants';
-import { Cart, Meal, Menu } from '../../pages';
-import { MainLayout } from '../../components';
+import { MainLayout } from '@/components/app';
+import { AppRoute } from '@/constants';
+import { Cart, Meal, Menu } from '@/pages';
 
 const APP_ROUTES: RouteObject[] = [
   {

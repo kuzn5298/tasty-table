@@ -1,4 +1,5 @@
 import { Suspense } from 'react';
+import clsx from 'clsx';
 import { Outlet } from 'react-router-dom';
 import Header from '../Header';
 
@@ -8,7 +9,7 @@ const MainLayout = () => {
   return (
     <div className={classes.container}>
       <Header />
-      <main className={classes.main}>
+      <main className={clsx('container', classes.main)}>
         <Suspense fallback={<div>loading...</div>}>
           <Outlet />
         </Suspense>

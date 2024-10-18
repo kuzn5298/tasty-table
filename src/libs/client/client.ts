@@ -1,4 +1,6 @@
-import { ResponseApi } from '../../types';
+import { ResponseApi } from '@/types';
+
+const BASE_URL = 'https://www.themealdb.com/api/json/v1/1/';
 
 class Client {
   constructor(private baseUrl: string) {}
@@ -22,6 +24,6 @@ class Client {
   }
 }
 
-const client = new Client('https://www.themealdb.com/api/json/v1/1/');
+const client = new Client(BASE_URL);
 
 export default client;

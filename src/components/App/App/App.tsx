@@ -1,7 +1,7 @@
 import { RouterProvider } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { appRoutes } from '../../libs/routes';
-import { store } from '../../store';
+import { appRoutes } from '@/libs/routes';
+import { store } from '@/store';
 
 const App = () => {
   return (
