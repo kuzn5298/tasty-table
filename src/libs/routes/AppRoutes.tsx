@@ -23,4 +23,4 @@ const APP_ROUTES: RouteObject[] = [
   },
 ];
 
-export default createBrowserRouter(APP_ROUTES);
+export const appRoutes = createBrowserRouter(APP_ROUTES);

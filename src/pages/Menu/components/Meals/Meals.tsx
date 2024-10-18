@@ -5,9 +5,9 @@ import {
   mealActions,
   useAppDispatch,
   useAppSelector,
-} from '../../../../store';
-import { FetchStatus } from '../../../../constants';
-import { ShortMeal } from '../../../../types';
+} from '@/store';
+import { FetchStatus } from '@/constants';
+import { ShortMeal } from '@/types';
 
 import classes from './Meals.module.css';
 
@@ -29,7 +29,7 @@ const Meals: React.FC<MealsProps> = ({ category }) => {
     ) {
       dispatch(mealActions.fetchMealsByCategory(category));
     }
-  }, [status, category]);
+  }, [status, category, dispatch]);
 
   if (isLoading) {
     return <div>loading...</div>;

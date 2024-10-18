@@ -5,7 +5,7 @@ import Header from '../Header';
 
 import classes from './MainLayout.module.css';
 
-const MainLayout = () => {
+export const MainLayout: React.FC = () => {
   return (
     <div className={classes.container}>
       <Header />
@@ -17,5 +17,3 @@ const MainLayout = () => {
     </div>
   );
 };
-
-export default MainLayout;

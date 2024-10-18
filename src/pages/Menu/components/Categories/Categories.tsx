@@ -20,7 +20,7 @@ const Categories: React.FC<CategoriesProps> = ({ value, onChange }) => {
     if (status === FetchStatus.Idle) {
       dispatch(categoryActions.fetchCategories());
     }
-  }, [status]);
+  }, [status, dispatch]);
 
   if (isLoading) {
     return <aside>loading...</aside>;

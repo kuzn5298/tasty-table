@@ -2,7 +2,7 @@ import client from '../libs/client';
 import { Category, Meal, ResponseApi } from '../types';
 
 export const getMealById = async (id: string): Promise<ResponseApi<Meal>> => {
-  let { data, ...response } = await client.get<{ meals: Meal[] }>(
+  const { data, ...response } = await client.get<{ meals: Meal[] }>(
     `/lookup.php?i=${id}`
   );
 
@@ -15,7 +15,7 @@ export const getMealById = async (id: string): Promise<ResponseApi<Meal>> => {
 export const searchMealsByName = async (
   name: string
 ): Promise<ResponseApi<Meal[]>> => {
-  let { data, ...response } = await client.get<{ meals: Meal[] }>(
+  const { data, ...response } = await client.get<{ meals: Meal[] }>(
     `/search.php?s=${name}`
   );
 
@@ -28,7 +28,7 @@ export const searchMealsByName = async (
 export const getMealsByCategory = async (
   category: string
 ): Promise<ResponseApi<Meal[]>> => {
-  let { data, ...response } = await client.get<{ meals: Meal[] }>(
+  const { data, ...response } = await client.get<{ meals: Meal[] }>(
     `/filter.php?c=${category}`
   );
 
@@ -41,7 +41,7 @@ export const getMealsByCategory = async (
 export const getMealsCategories = async (): Promise<
   ResponseApi<Category[]>
 > => {
-  let { data, ...response } = await client.get<{ categories: Category[] }>(
+  const { data, ...response } = await client.get<{ categories: Category[] }>(
     `/categories.php`
   );
 

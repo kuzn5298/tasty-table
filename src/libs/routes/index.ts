@@ -1,1 +1,1 @@
-export { default as appRoutes } from './AppRoutes';
+export * from './AppRoutes';

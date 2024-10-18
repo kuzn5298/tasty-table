@@ -6,7 +6,7 @@ import { selectCount, useAppSelector } from '@/store';
 
 import classes from './Header.module.css';
 
-const Header = () => {
+const Header: React.FC = () => {
   const cartCount = useAppSelector(selectCount);
   return (
     <header className={clsx('container', classes.header)}>

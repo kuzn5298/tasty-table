@@ -3,7 +3,7 @@ import clsx from 'clsx';
 
 import classes from './SvgIcon.module.css';
 
-export interface SvgIconProps extends React.SVGProps<SVGSVGElement> {}
+export type SvgIconProps = React.SVGProps<SVGSVGElement>;
 
 export const SvgIcon: React.FC<SvgIconProps> = ({
   children = null,
