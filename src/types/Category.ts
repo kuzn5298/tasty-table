@@ -1,6 +1,7 @@
-export interface Category {
-  idCategory: string;
+export interface CategoryApi {
   strCategory: string;
-  strCategoryThumb: string;
-  strCategoryDescription: string;
+}
+
+export interface Category {
+  name: string;
 }

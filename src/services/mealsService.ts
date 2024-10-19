@@ -2,6 +2,8 @@ import client from '../libs/client';
 import {
   Area,
   AreaApi,
+  Category,
+  CategoryApi,
   Meal,
   MealApi,
   ResponseApi,
@@ -52,6 +54,26 @@ export const getMealsAreas = async (): Promise<ResponseApi<Area[]>> => {
     data?.meals
       ?.map((item) => ({
         name: item.strArea,
+      }))
+      ?.filter((area) => area.name !== 'Unknown') ?? null;
+
+  return {
+    ...response,
+    data: parsedData,
+  };
+};
+
+export const getMealsCategories = async (): Promise<
+  ResponseApi<Category[]>
+> => {
+  const { data, ...response } = await client.get<{ meals: CategoryApi[] }>(
+    '/list.php?c=list'
+  );
+
+  const parsedData: Category[] | null =
+    data?.meals
+      ?.map((item) => ({
+        name: item.strCategory,
       }))
       ?.filter((area) => area.name !== 'Unknown') ?? null;
 

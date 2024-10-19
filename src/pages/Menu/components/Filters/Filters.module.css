@@ -1,0 +1,26 @@
+.container {
+  display: grid;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 0;
+
+  grid-template-columns: repeat(1, 1fr);
+
+  @media (min-width: 480px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: 992px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  * {
+    flex: 1;
+  }
+}
+
+.input {
+  @media (min-width: 480px) {
+    grid-column: span 2;
+  }
+}

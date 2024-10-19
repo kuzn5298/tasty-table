@@ -28,7 +28,7 @@ export const AreaCards: React.FC<AreaCardsProps> = ({ area }) => {
   });
 
   const { isPending, data: { data } = {} } = useQuery({
-    queryKey: [area],
+    queryKey: ['getMealsByArea', area],
     queryFn: () => mealsService.getMealsByArea(area),
     enabled: inView,
   });

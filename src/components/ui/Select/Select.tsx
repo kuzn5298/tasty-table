@@ -17,7 +17,7 @@ export const Select: React.FC<SelectProps> = ({
     <span className={clsx(classes.select, className)}>
       <select {...props}>
         {placeholder && (
-          <option value={undefined} disabled selected>
+          <option value='' disabled>
             {placeholder}
           </option>
         )}
