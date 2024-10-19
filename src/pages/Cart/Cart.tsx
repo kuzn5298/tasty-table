@@ -16,38 +16,32 @@ const Cart = () => {
     <div className={classes.container}>
       <ul className={classes.grid}>
         {meals?.map((meal) => (
-          <li key={meal.idMeal}>
+          <li key={meal.id}>
             <div className={classes.card}>
               <img
-                src={meal.strMealThumb}
-                alt={meal.strMeal}
+                src={meal.img}
+                alt={meal.name}
                 className={classes.img}
-                onClick={() => navigate(`/meal/${meal.idMeal}`)}
+                onClick={() => navigate(`/meal/${meal.id}`)}
               />
               <div className={classes.cardInfo}>
-                <div className={classes.cardTitle}>{meal.strMeal}</div>
+                <div className={classes.cardTitle}>{meal.name}</div>
                 <div>
                   ${meal.price} x {meal.count} = ${meal.price * meal.count}
                 </div>
                 <div>
                   <button
-                    onClick={() =>
-                      dispatch(cartActions.decrementMeal(meal.idMeal))
-                    }
+                    onClick={() => dispatch(cartActions.decrementMeal(meal.id))}
                   >
                     -
                   </button>
                   <button
-                    onClick={() =>
-                      dispatch(cartActions.incrementMeal(meal.idMeal))
-                    }
+                    onClick={() => dispatch(cartActions.incrementMeal(meal.id))}
                   >
                     +
                   </button>
                   <button
-                    onClick={() =>
-                      dispatch(cartActions.removeMeal(meal.idMeal))
-                    }
+                    onClick={() => dispatch(cartActions.removeMeal(meal.id))}
                   >
                     remove
                   </button>

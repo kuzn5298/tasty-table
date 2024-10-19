@@ -32,7 +32,7 @@ const Meal = () => {
     return <Navigate to={AppRoute.Home} />;
   }
 
-  return <div>{meal?.strMeal}</div>;
+  return <div>{meal?.name}</div>;
 };
 
 export default Meal;

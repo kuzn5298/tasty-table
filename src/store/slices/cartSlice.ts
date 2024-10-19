@@ -3,7 +3,6 @@ import { ShortMeal } from './../../types';
 
 interface StoreMeal extends ShortMeal {
   count: number;
-  price: number;
 }
 
 interface CartState {
@@ -15,12 +14,12 @@ const initialState: CartState = {
 };
 
 const increment = (state: CartState, id: string) => {
-  const meal = state.meals.find((meal) => meal.idMeal === id);
+  const meal = state.meals.find((meal) => meal.id === id);
   if (meal) meal.count++;
 };
 
 const remove = (state: CartState, id: string) => {
-  state.meals = state.meals.filter((meal) => meal.idMeal !== id);
+  state.meals = state.meals.filter((meal) => meal.id !== id);
 };
 
 const cartSlice = createSlice({
@@ -29,10 +28,10 @@ const cartSlice = createSlice({
   reducers: {
     addMeal: (state, action: PayloadAction<Omit<StoreMeal, 'count'>>) => {
       const isInCart = state.meals.some(
-        (meal) => meal.idMeal === action.payload.idMeal
+        (meal) => meal.id === action.payload.id
       );
       if (isInCart) {
-        increment(state, action.payload.idMeal);
+        increment(state, action.payload.id);
       } else {
         state.meals.push({ ...action.payload, count: 1 });
       }
@@ -44,7 +43,7 @@ const cartSlice = createSlice({
       increment(state, action.payload);
     },
     decrementMeal: (state, action: PayloadAction<string>) => {
-      const meal = state.meals.find((meal) => meal.idMeal === action.payload);
+      const meal = state.meals.find((meal) => meal.id === action.payload);
       if (meal) {
         meal.count--;
         if (meal.count <= 0) {

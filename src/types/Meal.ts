@@ -1,9 +1,9 @@
-export interface Meal {
+export interface MealApi {
   idMeal: string;
   strMeal: string;
   strDrinkAlternate: string | null;
-  strCategory: string | null;
-  strArea: string | null;
+  strCategory: string;
+  strArea: string;
   strInstructions: string | null;
   strMealThumb: string;
   strTags: string | null;
@@ -16,4 +16,17 @@ export interface Meal {
   [key: `strMeasure${number}`]: string | null;
 }
 
-export type ShortMeal = Pick<Meal, 'idMeal' | 'strMeal' | 'strMealThumb'>;
+export interface Meal {
+  id: string;
+  name: string;
+  category: string;
+  area: string;
+  img: string;
+  tags: string[];
+  ingredients: string[];
+  price: number;
+}
+
+export type ShortMealApi = Pick<MealApi, 'idMeal' | 'strMeal' | 'strMealThumb'>;
+
+export type ShortMeal = Pick<Meal, 'id' | 'name' | 'img' | 'price'>;
