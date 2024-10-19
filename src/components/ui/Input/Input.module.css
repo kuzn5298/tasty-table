@@ -1,0 +1,19 @@
+.input {
+  outline: none;
+  padding: 0.625rem 0.75rem;
+  border: 1px solid var(--gray-color);
+  box-sizing: border-box;
+  font-size: inherit;
+  line-height: 1em;
+  min-height: 2.75rem;
+
+  &::placeholder {
+    color: var(--gray-color);
+    font-size: 1em;
+    line-height: 1em;
+  }
+
+  &:focus {
+    border-color: var(--primary-hover-color);
+  }
+}
