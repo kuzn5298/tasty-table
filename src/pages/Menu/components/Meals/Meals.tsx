@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Button, Card, Counter } from '@/components/ui';
 import {
   cartActions,
   mealActions,
@@ -18,6 +19,7 @@ interface MealsProps {
 const Meals: React.FC<MealsProps> = ({ category }) => {
   const dispatch = useAppDispatch();
   const { meals, status } = useAppSelector((state) => state.meal);
+  const cartMeals = useAppSelector((state) => state.cart.meals);
   const isLoading = status[category] === FetchStatus.Loading;
 
   const navigate = useNavigate();
@@ -44,26 +46,44 @@ const Meals: React.FC<MealsProps> = ({ category }) => {
     );
   };
 
+  const increment = (id: string) => {
+    dispatch(cartActions.incrementMeal(id));
+  };
+
+  const decrement = (id: string) => {
+    dispatch(cartActions.decrementMeal(id));
+  };
+
   return (
     <div className={classes.container}>
       <ul className={classes.grid}>
-        {meals[category]?.map((meal) => (
-          <li key={meal.idMeal}>
-            <div className={classes.card}>
-              <img
-                src={meal.strMealThumb}
-                alt={meal.strMeal}
-                className={classes.img}
+        {meals[category]?.map((meal) => {
+          const count =
+            cartMeals.find((cartMeal) => cartMeal.idMeal === meal.idMeal)
+              ?.count ?? 0;
+          return (
+            <li key={meal.idMeal}>
+              <Card
+                style={{ height: '100%' }}
+                title={meal.strMeal}
                 onClick={() => navigate(`/meal/${meal.idMeal}`)}
+                image={meal.strMealThumb}
+                price={'15$'}
+                action={
+                  count ? (
+                    <Counter
+                      count={count}
+                      onDecrement={() => decrement(meal.idMeal)}
+                      onIncrement={() => increment(meal.idMeal)}
+                    />
+                  ) : (
+                    <Button onClick={() => addToCart(meal)}>Buy</Button>
+                  )
+                }
               />
-              <div className={classes.cardInfo}>
-                <div className={classes.cardTitle}>{meal.strMeal}</div>
-                <div>$10.5</div>
-                <button onClick={() => addToCart(meal)}>add</button>
-              </div>
-            </div>
-          </li>
-        ))}
+            </li>
+          );
+        })}
       </ul>
     </div>
   );
