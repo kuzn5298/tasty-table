@@ -6,7 +6,9 @@ interface CartState {
   [id: string]: StoreMeal;
 }
 
-const initialState: CartState = {};
+const initialState: CartState = JSON.parse(
+  localStorage.getItem('cart') || '{}'
+);
 
 const increment = (state: CartState, id: string) => {
   const meal = state[id];
