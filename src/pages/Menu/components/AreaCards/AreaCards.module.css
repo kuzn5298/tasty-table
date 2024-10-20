@@ -5,10 +5,12 @@
 }
 
 .title {
-  padding: 0 0.25rem;
+  padding: 0.25rem 0.5rem;
+  margin: 0 -0.5rem;
   font-size: 1.25rem;
   font-weight: 500;
   position: sticky;
   top: 0;
   background-color: var(--background-color);
+  border-bottom: 1px solid var(--shadow-color);
 }

@@ -1,4 +1,4 @@
-import client from '../libs/client';
+import client from '@/libs/client';
 import {
   Area,
   AreaApi,
@@ -9,7 +9,7 @@ import {
   ResponseApi,
   ShortMeal,
   ShortMealApi,
-} from '../types';
+} from '@/types';
 
 const generatePrice = (id: string, min = 5, max = 20): number => {
   const numericId = parseInt(id);
@@ -98,9 +98,39 @@ export const getMealById = async (id: string): Promise<ResponseApi<Meal>> => {
 
 export const getMealsByArea = async (
   area: string
+): Promise<ResponseApi<ShortMeal[]>> => {
+  const { data, ...response } = await client.get<{ meals: ShortMealApi[] }>(
+    `/filter.php?a=${area}`
+  );
+
+  const meals = data?.meals?.map(parseShortMeal);
+
+  return {
+    ...response,
+    data: meals ?? null,
+  };
+};
+
+export const getMealsByCategory = async (
+  category: string
+): Promise<ResponseApi<ShortMeal[]>> => {
+  const { data, ...response } = await client.get<{ meals: ShortMealApi[] }>(
+    `/filter.php?c=${category}`
+  );
+
+  const meals = data?.meals?.map(parseShortMeal);
+
+  return {
+    ...response,
+    data: meals ?? null,
+  };
+};
+
+export const getMealsByName = async (
+  name: string
 ): Promise<ResponseApi<Meal[]>> => {
   const { data, ...response } = await client.get<{ meals: MealApi[] }>(
-    `/filter.php?a=${area}`
+    `/search.php?s=${name}`
   );
 
   const meals = data?.meals?.map(parseMeal);
@@ -108,5 +138,52 @@ export const getMealsByArea = async (
   return {
     ...response,
     data: meals ?? null,
+  };
+};
+
+interface MealsFilter {
+  search?: string;
+  category?: string;
+  area?: string;
+}
+
+const findMatchesMeals = (
+  meals1?: ShortMeal[] | null,
+  meals2?: ShortMeal[] | null
+): ShortMeal[] => {
+  if (!meals1) {
+    return meals2 ?? [];
+  }
+  if (!meals2) {
+    return meals1 ?? [];
+  }
+
+  const meals2Ids = new Set(meals2.map((meal) => meal.id));
+  return meals1.filter((meal) => meals2Ids.has(meal.id));
+};
+
+export const getMealsByFilter = async ({
+  search,
+  category,
+  area,
+}: MealsFilter): Promise<ResponseApi<ShortMeal[]>> => {
+  if (!!search && !category && !area) {
+    return getMealsByName(search);
+  }
+  const categoryResponse = category ? await getMealsByCategory(category) : null;
+  const areaResponse = area ? await getMealsByArea(area) : null;
+  const meals = findMatchesMeals(categoryResponse?.data, areaResponse?.data);
+  const foundMeals = meals.filter((meal) =>
+    meal.name.toLowerCase().includes((search ?? '')?.toLocaleLowerCase())
+  );
+
+  return {
+    data: foundMeals,
+    status: Math.max(
+      categoryResponse?.status ?? 0,
+      areaResponse?.status ?? 0,
+      404
+    ),
+    statusText: categoryResponse?.statusText ?? areaResponse?.statusText ?? '',
   };
 };

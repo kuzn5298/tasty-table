@@ -1,7 +1,5 @@
 import { useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { mealsService } from '@/services';
-import { AreaCards, Filters, FilterType } from './components';
+import { AreasCards, FilteredCards, Filters, FilterType } from './components';
 
 import classes from './Menu.module.css';
 
@@ -12,17 +10,22 @@ const Menu = () => {
     category: '',
   });
 
-  const { data: { data: areasData } = {} } = useQuery({
-    queryKey: ['getMealsAreas'],
-    queryFn: mealsService.getMealsAreas,
-  });
+  const withFilters = Object.values(filter).some(Boolean);
 
   return (
     <div className={classes.container}>
       <Filters value={filter} onChange={setFilter} />
-      {areasData?.map((area) => (
-        <AreaCards key={area.name} area={area.name} />
-      ))}
+      <div className={classes['scroll-container']}>
+        {withFilters ? (
+          <FilteredCards
+            search={filter.search}
+            area={filter.area}
+            category={filter.category}
+          />
+        ) : (
+          <AreasCards />
+        )}
+      </div>
     </div>
   );
 };
