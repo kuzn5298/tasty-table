@@ -1,1 +1,1 @@
-export * as mealsService from './mealsService';
+export * from './mealsService';

@@ -1,8 +1,8 @@
 import { Navigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { Meal as MealType } from '../../types';
-import { getMealById } from '../../services/mealsService';
-import { AppRoute } from '../../constants';
+import { mealsService } from '@/services';
+import { Meal as MealType } from '@/types';
+import { AppRoute } from '@/constants';
 
 const Meal = () => {
   const { id } = useParams<{ id: string }>();
@@ -13,7 +13,7 @@ const Meal = () => {
     const fetch = async () => {
       if (id) {
         setLoading(true);
-        const { data, status } = await getMealById(id);
+        const { data, status } = await mealsService.getMealById(id);
         if (status >= 200 && status < 300 && data) {
           setMeal(data);
         }

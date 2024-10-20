@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import { mealsService } from '@/services';
 import { useQuery } from '@tanstack/react-query';
 import { CardGrid, CardGridSkeleton } from '@/components/ui';
-import { useAppSelector } from '@/store';
+import { selectCartMeals, useAppSelector } from '@/store';
 import { MealCard } from '../MealCard';
 
 import classes from './FilteredCards.module.css';
@@ -20,7 +20,7 @@ export const FilteredCards: React.FC<FilteredCardsProps> = ({
   search,
   className,
 }) => {
-  const cart = useAppSelector((state) => state.cart.meals);
+  const cart = useAppSelector(selectCartMeals);
 
   const { data: { data: filteredData } = {}, isPending } = useQuery({
     queryKey: ['getMealsByFilter', search, category, area],
@@ -39,7 +39,7 @@ export const FilteredCards: React.FC<FilteredCardsProps> = ({
       ) : (
         <CardGrid>
           {filteredData?.map((meal) => {
-            const count = cart.find((c) => c.id === meal.id)?.count ?? 0;
+            const count = cart[meal.id]?.count ?? 0;
             return <MealCard key={meal.id} meal={meal} count={count} />;
           })}
         </CardGrid>

@@ -3,7 +3,7 @@ import { useInView } from 'react-intersection-observer';
 import { useQuery } from '@tanstack/react-query';
 import { CardGrid, CardGridSkeleton } from '@/components/ui';
 import { mealsService } from '@/services';
-import { useAppSelector } from '@/store';
+import { selectCartMeals, useAppSelector } from '@/store';
 import { MealCard } from '../MealCard';
 
 import classes from './AreaCards.module.css';
@@ -13,7 +13,7 @@ export interface AreaCardsProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 export const AreaCards: React.FC<AreaCardsProps> = ({ area }) => {
-  const cart = useAppSelector((state) => state.cart.meals);
+  const cart = useAppSelector(selectCartMeals);
 
   const { ref, inView } = useInView({
     triggerOnce: true,
@@ -34,7 +34,7 @@ export const AreaCards: React.FC<AreaCardsProps> = ({ area }) => {
       ) : (
         <CardGrid>
           {data?.map((meal) => {
-            const count = cart.find((c) => c.id === meal.id)?.count ?? 0;
+            const count = cart[meal.id]?.count ?? 0;
             return <MealCard key={meal.id} meal={meal} count={count} />;
           })}
         </CardGrid>

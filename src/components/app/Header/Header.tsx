@@ -2,12 +2,12 @@ import clsx from 'clsx';
 import { Link } from 'react-router-dom';
 import { CartIcon } from '@/components/icons';
 import { AppRoute } from '@/constants';
-import { selectCount, useAppSelector } from '@/store';
+import { selectCartCount, useAppSelector } from '@/store';
 
 import classes from './Header.module.css';
 
 const Header: React.FC = () => {
-  const cartCount = useAppSelector(selectCount);
+  const cartCount = useAppSelector(selectCartCount);
   return (
     <header className={clsx('container', classes.header)}>
       <Link to={AppRoute.Home} className={classes.logo}>

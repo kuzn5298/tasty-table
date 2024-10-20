@@ -1,21 +1,25 @@
 import { useNavigate } from 'react-router-dom';
 import {
-  cartActions,
-  selectTotal,
+  decrementMealInCart,
+  incrementMealInCart,
+  removeMealFromCart,
+  selectCartMeals,
+  selectCartTotal,
   useAppDispatch,
   useAppSelector,
-} from '../../store';
+} from '@/store';
+
 import classes from './Cart.module.css';
 
 const Cart = () => {
   const dispatch = useAppDispatch();
-  const meals = useAppSelector((state) => state.cart.meals);
-  const total = useAppSelector(selectTotal);
+  const cartMeals = useAppSelector(selectCartMeals);
+  const total = useAppSelector(selectCartTotal);
   const navigate = useNavigate();
   return (
     <div className={classes.container}>
       <ul className={classes.grid}>
-        {meals?.map((meal) => (
+        {Object.values(cartMeals).map((meal) => (
           <li key={meal.id}>
             <div className={classes.card}>
               <img
@@ -31,18 +35,16 @@ const Cart = () => {
                 </div>
                 <div>
                   <button
-                    onClick={() => dispatch(cartActions.decrementMeal(meal.id))}
+                    onClick={() => dispatch(decrementMealInCart(meal.id))}
                   >
                     -
                   </button>
                   <button
-                    onClick={() => dispatch(cartActions.incrementMeal(meal.id))}
+                    onClick={() => dispatch(incrementMealInCart(meal.id))}
                   >
                     +
                   </button>
-                  <button
-                    onClick={() => dispatch(cartActions.removeMeal(meal.id))}
-                  >
+                  <button onClick={() => dispatch(removeMealFromCart(meal.id))}>
                     remove
                   </button>
                 </div>
