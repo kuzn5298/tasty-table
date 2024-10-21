@@ -7,3 +7,4 @@ export * from './Select';
 export * from './Spinner';
 export * from './Backdrop';
 export * from './Dialog';
+export * from './Chip';

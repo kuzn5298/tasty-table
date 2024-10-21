@@ -3,3 +3,4 @@ export * from './AreasCards';
 export * from './Filters';
 export * from './FilteredCards';
 export * from './MealCard';
+export * from './MealDialog';

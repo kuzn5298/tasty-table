@@ -19,11 +19,16 @@ export const parseShortMeal = (meal: ShortMealApi): ShortMeal => ({
   price: generatePrice(meal.idMeal),
 });
 
+const capitalizeFirstLetter = (string: string) => {
+  return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+};
+
 export const parseMeal = (meal: MealApi): Meal => {
-  const tags = meal.strTags?.split(',') ?? [];
-  const ingredients = INGREDIENTS_NUMBERS.map(
-    (number) => meal[`strIngredient${number}`]
-  ).filter(Boolean) as string[];
+  const tags = meal.strTags?.split(',').map(capitalizeFirstLetter) ?? [];
+  const ingredientsArr = INGREDIENTS_NUMBERS.map((number) =>
+    capitalizeFirstLetter(meal[`strIngredient${number}`] ?? '')
+  ).filter(Boolean);
+  const ingredients = [...new Set(ingredientsArr)];
 
   return {
     ...parseShortMeal(meal),

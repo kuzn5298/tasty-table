@@ -19,7 +19,6 @@ export const AreaCards: React.FC<AreaCardsProps> = ({ area }) => {
 
   const { ref, inView } = useInView({
     triggerOnce: true,
-    threshold: 0.1,
   });
 
   const { isPending, data: { data } = {} } = useQuery({

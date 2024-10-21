@@ -1,7 +1,8 @@
 import React, { createContext, useCallback, useMemo, useState } from 'react';
-import { Backdrop, Dialog, Spinner } from '@/components/ui';
-import { mealsService } from '@/services';
 import { useQuery } from '@tanstack/react-query';
+import { Backdrop, Spinner } from '@/components/ui';
+import { mealsService } from '@/services';
+import { MealDialog } from '../../components';
 
 interface MealDialogContextValue {
   openMealDialog: (id: string) => void;
@@ -44,9 +45,7 @@ export const MealDialogProvider: React.FC<MealDialogProviderProps> = ({
   return (
     <MealDialogContext.Provider value={contextValue}>
       {children}
-      <Dialog open={Boolean(meal)} onClose={closeMealDialog}>
-        {meal?.name}
-      </Dialog>
+      {!!meal && <MealDialog open onClose={closeMealDialog} meal={meal} />}
       <Backdrop open={isLoading}>
         <Spinner />
       </Backdrop>

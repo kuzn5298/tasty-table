@@ -1,0 +1,88 @@
+.container {
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+
+  @media (max-width: 992px) {
+    flex-direction: column;
+  }
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+}
+
+.img-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2.5rem;
+
+  @media (max-width: 992px) {
+    padding: 1rem;
+  }
+}
+
+.info-container {
+  display: flex;
+  flex: 1;
+  max-width: 30rem;
+  overflow: hidden;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 2.5rem;
+  padding-bottom: 1.5rem;
+  background-color: var(--second-background-color);
+
+  @media (max-width: 992px) {
+    padding: 1rem;
+  }
+}
+
+.img {
+  max-width: 16rem;
+  width: 100%;
+  border-radius: 50%;
+
+  @media (max-width: 992px) {
+    max-width: 8rem;
+  }
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.title {
+  font-size: 1.25rem;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-wrap: nowrap;
+}
+
+.body {
+  flex: 1;
+  overflow: auto;
+  max-height: 20rem;
+  padding: 0.25rem;
+}
+
+.ingredients {
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: repeat(3, 1fr);
+
+  @media (max-width: 480px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.btn {
+  width: 100%;
+}
