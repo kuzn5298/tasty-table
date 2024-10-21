@@ -5,6 +5,7 @@ import { CardGrid, CardGridSkeleton } from '@/components/ui';
 import { mealsService } from '@/services';
 import { selectCartMeals, useAppSelector } from '@/store';
 import { MealCard } from '../MealCard';
+import { useMealDialog } from '../../contexts';
 
 import classes from './AreaCards.module.css';
 
@@ -14,6 +15,7 @@ export interface AreaCardsProps extends React.HTMLAttributes<HTMLDivElement> {
 
 export const AreaCards: React.FC<AreaCardsProps> = ({ area }) => {
   const cart = useAppSelector(selectCartMeals);
+  const { openMealDialog } = useMealDialog();
 
   const { ref, inView } = useInView({
     triggerOnce: true,
@@ -35,7 +37,14 @@ export const AreaCards: React.FC<AreaCardsProps> = ({ area }) => {
         <CardGrid>
           {data?.map((meal) => {
             const count = cart[meal.id]?.count ?? 0;
-            return <MealCard key={meal.id} meal={meal} count={count} />;
+            return (
+              <MealCard
+                key={meal.id}
+                meal={meal}
+                count={count}
+                onClick={() => openMealDialog(meal.id)}
+              />
+            );
           })}
         </CardGrid>
       )}

@@ -1,6 +1,4 @@
-import { useNavigate } from 'react-router-dom';
 import { Button, Card, Counter } from '@/components/ui';
-import { AppRoute } from '@/constants';
 import {
   addMealToCart,
   decrementMealInCart,
@@ -12,10 +10,14 @@ import { ShortMeal } from '@/types';
 interface MealCardProps {
   meal: ShortMeal;
   count?: number;
+  onClick?: (event: React.MouseEvent<HTMLDivElement>) => void;
 }
 
-export const MealCard: React.FC<MealCardProps> = ({ meal, count = 0 }) => {
-  const navigate = useNavigate();
+export const MealCard: React.FC<MealCardProps> = ({
+  meal,
+  count = 0,
+  onClick,
+}) => {
   const dispatch = useAppDispatch();
 
   const addToCart = (meal: ShortMeal) => {
@@ -32,7 +34,7 @@ export const MealCard: React.FC<MealCardProps> = ({ meal, count = 0 }) => {
 
   return (
     <Card
-      onClick={() => navigate(AppRoute.Meal.replace(':id', meal.id))}
+      onClick={onClick}
       key={meal.id}
       title={meal.name}
       image={meal.img}

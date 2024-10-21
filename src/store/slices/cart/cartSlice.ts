@@ -7,7 +7,7 @@ interface CartState {
 }
 
 const initialState: CartState = JSON.parse(
-  localStorage.getItem('cart') || '{}'
+  localStorage.getItem('cart') ?? '{}'
 );
 
 const increment = (state: CartState, id: string) => {

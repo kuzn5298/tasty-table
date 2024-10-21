@@ -4,6 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import { CardGrid, CardGridSkeleton } from '@/components/ui';
 import { selectCartMeals, useAppSelector } from '@/store';
 import { MealCard } from '../MealCard';
+import { useMealDialog } from '../../contexts';
 
 import classes from './FilteredCards.module.css';
 
@@ -21,6 +22,7 @@ export const FilteredCards: React.FC<FilteredCardsProps> = ({
   className,
 }) => {
   const cart = useAppSelector(selectCartMeals);
+  const { openMealDialog } = useMealDialog();
 
   const { data: { data: filteredData } = {}, isPending } = useQuery({
     queryKey: ['getMealsByFilter', search, category, area],
@@ -40,7 +42,14 @@ export const FilteredCards: React.FC<FilteredCardsProps> = ({
         <CardGrid>
           {filteredData?.map((meal) => {
             const count = cart[meal.id]?.count ?? 0;
-            return <MealCard key={meal.id} meal={meal} count={count} />;
+            return (
+              <MealCard
+                key={meal.id}
+                meal={meal}
+                count={count}
+                onClick={() => openMealDialog(meal.id)}
+              />
+            );
           })}
         </CardGrid>
       )}

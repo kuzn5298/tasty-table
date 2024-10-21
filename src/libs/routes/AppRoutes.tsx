@@ -1,7 +1,7 @@
 import { createBrowserRouter, RouteObject } from 'react-router-dom';
 import { MainLayout } from '@/components/app';
 import { AppRoute } from '@/constants';
-import { Cart, Meal, Menu } from '@/pages';
+import { Cart, Menu } from '@/pages';
 
 const APP_ROUTES: RouteObject[] = [
   {
@@ -14,10 +14,6 @@ const APP_ROUTES: RouteObject[] = [
       {
         path: AppRoute.Cart,
         element: <Cart />,
-      },
-      {
-        path: AppRoute.Meal,
-        element: <Meal />,
       },
     ],
   },

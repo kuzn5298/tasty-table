@@ -10,7 +10,7 @@ export const App: React.FC = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <Provider store={store}>
-        <RouterProvider router={appRoutes} />;
+        <RouterProvider router={appRoutes} />
       </Provider>
     </QueryClientProvider>
   );

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { AreasCards, FilteredCards, Filters, FilterType } from './components';
+import { MealDialogProvider } from './contexts';
 
 import classes from './Menu.module.css';
 
@@ -13,20 +14,22 @@ const Menu = () => {
   const withFilters = Object.values(filter).some(Boolean);
 
   return (
-    <div className={classes.container}>
-      <Filters value={filter} onChange={setFilter} />
-      <div className={classes['scroll-container']}>
-        {withFilters ? (
-          <FilteredCards
-            search={filter.search}
-            area={filter.area}
-            category={filter.category}
-          />
-        ) : (
-          <AreasCards />
-        )}
+    <MealDialogProvider>
+      <div className={classes.container}>
+        <Filters value={filter} onChange={setFilter} />
+        <div className={classes['scroll-container']}>
+          {withFilters ? (
+            <FilteredCards
+              search={filter.search}
+              area={filter.area}
+              category={filter.category}
+            />
+          ) : (
+            <AreasCards />
+          )}
+        </div>
       </div>
-    </div>
+    </MealDialogProvider>
   );
 };
 

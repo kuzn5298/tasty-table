@@ -4,3 +4,6 @@ export * from './Counter';
 export * from './CardGrid';
 export * from './Input';
 export * from './Select';
+export * from './Spinner';
+export * from './Backdrop';
+export * from './Dialog';

@@ -8,6 +8,7 @@
   --background-color: #fefdfd;
   --gray-color: #949494;
   --shadow-color: rgba(0, 0, 0, 0.05);
+  --backdrop-color: rgba(0, 0, 0, 0.7);
 }
 
 body {
