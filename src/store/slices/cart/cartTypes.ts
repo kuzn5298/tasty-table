@@ -1,5 +1,5 @@
 import { ShortMeal } from '@/types';
 
-export interface StoreMeal extends ShortMeal {
+export interface CartMeal extends ShortMeal {
   count: number;
 }

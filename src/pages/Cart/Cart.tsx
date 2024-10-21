@@ -1,59 +1,71 @@
+import { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
-  decrementMealInCart,
-  incrementMealInCart,
-  removeMealFromCart,
+  clearMealsFromCart,
   selectCartMeals,
   selectCartTotal,
   useAppDispatch,
   useAppSelector,
 } from '@/store';
+import { Button } from '@/components/ui';
+import { AppRoute } from '@/constants';
+import { CartCard } from './components';
 
 import classes from './Cart.module.css';
 
+const DELIVERY_PRICE = 8;
+const SUCCESS_MESSAGE =
+  'Thank you for using our test application. We do not process real orders, but you have successfully completed the checkout process! 😊';
+
 const Cart = () => {
   const dispatch = useAppDispatch();
-  const cartMeals = useAppSelector(selectCartMeals);
-  const total = useAppSelector(selectCartTotal);
   const navigate = useNavigate();
+  const meals = useAppSelector(selectCartMeals);
+  const total = useAppSelector(selectCartTotal);
+  const mealsArr = useMemo(() => Object.values(meals), [meals]);
+
+  const confirmHandler = () => {
+    dispatch(clearMealsFromCart());
+    alert(SUCCESS_MESSAGE);
+  };
+
+  if (!mealsArr.length) {
+    return (
+      <div className={classes['empty-container']}>
+        <div className={classes['empty-title']}>Your cart is empty! 🛒</div>
+        <div>
+          It looks like you haven't added any items yet. Start exploring our
+          menu and fill your cart with delicious dishes!
+        </div>
+        <Button onClick={() => navigate(AppRoute.Home)}>Browse Menu</Button>
+      </div>
+    );
+  }
+
   return (
     <div className={classes.container}>
-      <ul className={classes.grid}>
-        {Object.values(cartMeals).map((meal) => (
-          <li key={meal.id}>
-            <div className={classes.card}>
-              <img
-                src={meal.img}
-                alt={meal.name}
-                className={classes.img}
-                onClick={() => navigate(`/meal/${meal.id}`)}
-              />
-              <div className={classes.cardInfo}>
-                <div className={classes.cardTitle}>{meal.name}</div>
-                <div>
-                  ${meal.price} x {meal.count} = ${meal.price * meal.count}
-                </div>
-                <div>
-                  <button
-                    onClick={() => dispatch(decrementMealInCart(meal.id))}
-                  >
-                    -
-                  </button>
-                  <button
-                    onClick={() => dispatch(incrementMealInCart(meal.id))}
-                  >
-                    +
-                  </button>
-                  <button onClick={() => dispatch(removeMealFromCart(meal.id))}>
-                    remove
-                  </button>
-                </div>
-              </div>
-            </div>
-          </li>
+      <section className={classes['order-section']}>
+        {mealsArr.map((meal) => (
+          <CartCard key={meal.id} meal={meal} />
         ))}
-      </ul>
-      <div className={classes.total}>${total}</div>
+      </section>
+      <section className={classes['total-section']}>
+        <div>
+          <span>Order amount:</span>
+          <span>{total}$</span>
+        </div>
+        <div>
+          <span>Delivery amount:</span>
+          <span>{DELIVERY_PRICE}$</span>
+        </div>
+        <div>
+          <span>Total order amount:</span>
+          <span>{total + DELIVERY_PRICE}$</span>
+        </div>
+      </section>
+      <Button className={classes['buy-button']} onClick={confirmHandler}>
+        Confirm
+      </Button>
     </div>
   );
 };

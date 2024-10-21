@@ -1,0 +1,77 @@
+.card {
+  min-height: fit-content;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  box-sizing: border-box;
+  padding: 1.5rem;
+  overflow: hidden;
+  border-radius: 0.5rem;
+  box-shadow: 0px 3px 1px -2px var(--shadow-color),
+    0px 2px 2px 0px var(--shadow-color), 0px 1px 5px 0px var(--shadow-color);
+  background-color: var(--background-color);
+}
+
+.img {
+  max-width: 6.5rem;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 0.75rem;
+  overflow: hidden;
+  align-items: flex-start;
+}
+
+.title {
+  font-size: 1.25rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-wrap: nowrap;
+  max-width: 100%;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+  align-self: stretch;
+}
+
+.close {
+  --size: 1.5rem;
+  position: relative;
+  background: none;
+  width: var(--size);
+  height: var(--size);
+  cursor: pointer;
+  border: 0;
+}
+
+.close:before,
+.close:after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--gray-color);
+}
+
+.close:before {
+  transform: rotate(45deg);
+}
+
+.close:after {
+  transform: rotate(-45deg);
+}
+
+.price {
+  font-size: 1.25rem;
+  font-weight: 600;
+}

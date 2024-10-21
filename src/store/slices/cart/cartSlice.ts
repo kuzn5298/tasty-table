@@ -1,9 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ShortMeal } from '@/types';
-import { StoreMeal } from './cartTypes';
+import { CartMeal } from './cartTypes';
 
 interface CartState {
-  [id: string]: StoreMeal;
+  [id: string]: CartMeal;
 }
 
 const initialState: CartState = JSON.parse(
@@ -47,6 +47,11 @@ const cartSlice = createSlice({
         }
       }
     },
+    clearMealsFromCart: (state) => {
+      Object.keys(state).forEach((key) => {
+        delete state[key];
+      });
+    },
   },
 });
 
@@ -55,6 +60,7 @@ export const {
   decrementMealInCart,
   incrementMealInCart,
   removeMealFromCart,
+  clearMealsFromCart,
 } = cartSlice.actions;
 
 export default cartSlice.reducer;

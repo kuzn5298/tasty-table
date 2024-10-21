@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import { Button, Chip, Dialog, SmallCard } from '@/components/ui';
 import { Meal } from '@/types';
+import { addMealToCart, useAppDispatch } from '@/store';
 
 import classes from './MealDialog.module.css';
 
@@ -9,7 +10,7 @@ const getIngredientImg = (ingredient: string) =>
 
 interface MealDialogProps {
   open?: boolean;
-  onClose?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  onClose?: (event?: React.MouseEvent<HTMLButtonElement>) => void;
   meal: Meal;
 }
 
@@ -18,6 +19,13 @@ export const MealDialog: React.FC<MealDialogProps> = ({
   onClose,
   meal,
 }) => {
+  const dispatch = useAppDispatch();
+
+  const buyMeal = () => {
+    dispatch(addMealToCart(meal));
+    onClose?.();
+  };
+
   const cardTags = useMemo(
     () => [meal.area, meal.category, ...meal.tags].filter(Boolean),
     [meal]
@@ -50,7 +58,9 @@ export const MealDialog: React.FC<MealDialogProps> = ({
             </div>
           </div>
           <div>
-            <Button className={classes.btn}>Buy for {meal.price}$</Button>
+            <Button className={classes.btn} onClick={buyMeal}>
+              Buy for {meal.price}$
+            </Button>
           </div>
         </section>
       </div>
