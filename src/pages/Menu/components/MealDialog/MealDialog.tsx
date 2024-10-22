@@ -26,10 +26,10 @@ export const MealDialog: React.FC<MealDialogProps> = ({
     onClose?.();
   };
 
-  const cardTags = useMemo(
-    () => [meal.area, meal.category, ...meal.tags].filter(Boolean),
-    [meal]
-  );
+  const cardTags = useMemo(() => {
+    const tags = [meal.area, meal.category, ...meal.tags].filter(Boolean);
+    return [...new Set(tags)];
+  }, [meal]);
 
   return (
     <Dialog open={open} onClose={onClose}>

@@ -45,9 +45,11 @@ const Cart = () => {
   return (
     <div className={classes.container}>
       <section className={classes['order-section']}>
-        {mealsArr.map((meal) => (
-          <CartCard key={meal.id} meal={meal} />
-        ))}
+        <div className={classes['order-cards']}>
+          {mealsArr.map((meal) => (
+            <CartCard key={meal.id} meal={meal} />
+          ))}
+        </div>
       </section>
       <section className={classes['total-section']}>
         <div>
@@ -63,9 +65,9 @@ const Cart = () => {
           <span>{total + DELIVERY_PRICE}$</span>
         </div>
       </section>
-      <Button className={classes['buy-button']} onClick={confirmHandler}>
-        Confirm
-      </Button>
+      <section className={classes['confirm-section']}>
+        <Button onClick={confirmHandler}>Confirm</Button>
+      </section>
     </div>
   );
 };

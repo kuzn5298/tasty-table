@@ -11,11 +11,14 @@
 }
 
 .order-section {
+  flex: 1;
+  overflow: auto;
+}
+
+.order-cards {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
-  flex: 1;
-  overflow: auto;
   padding: 0.25rem;
 }
 
@@ -32,9 +35,8 @@
   }
 }
 
-.buy-button {
+.confirm-section {
   align-self: flex-end;
-  min-height: fit-content;
 }
 
 /*----empty cart----*/

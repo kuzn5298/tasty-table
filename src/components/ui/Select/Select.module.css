@@ -17,6 +17,7 @@
     width: 100%;
     color: var(--text-color);
     border-radius: 0;
+    background-color: transparent;
 
     &:focus {
       border-color: var(--primary-hover-color);

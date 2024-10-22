@@ -103,6 +103,7 @@
 /* ------small card------ */
 
 .small-card {
+  --max-width: 5.5rem;
   display: flex;
   padding: 0.75rem;
   background-color: var(--background-color);
@@ -117,16 +118,15 @@
 
 .small-title {
   font-size: 0.75rem;
-  max-width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
   text-wrap: nowrap;
+  max-width: var(--max-width);
 }
 
 .small-img {
-  --size: 5.5rem;
-  width: var(--size);
-  height: var(--size);
+  width: var(--max-width);
+  height: var(--max-width);
   border-radius: 0.25rem;
   overflow: hidden;
   object-fit: contain;
