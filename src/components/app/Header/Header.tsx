@@ -10,11 +10,15 @@ const Header: React.FC = () => {
   const cartCount = useAppSelector(selectCartCount);
   return (
     <header className={clsx('container', classes.header)}>
-      <Link to={AppRoute.Home} className={classes.logo}>
+      <Link to={AppRoute.Home} className={classes.logo} data-testid='logo-link'>
         TastyTable
       </Link>
       <nav className={classes.nav}>
-        <Link to={AppRoute.Cart} className={classes.cart}>
+        <Link
+          to={AppRoute.Cart}
+          className={classes.cart}
+          data-testid='cart-link'
+        >
           <CartIcon />
           {Boolean(cartCount) && (
             <span className={classes.cartBadge}>{cartCount}</span>

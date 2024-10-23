@@ -6,6 +6,7 @@
     "module": "ESNext",
     "skipLibCheck": true,
     "esModuleInterop": true,
+    "types": ["@testing-library/jest-dom"],
 
     /* Bundler mode */
     "moduleResolution": "bundler",
@@ -22,9 +23,10 @@
     "noFallthroughCasesInSwitch": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@tests/*": ["./tests/*"]
     }
   },
-  "include": ["src", ".eslintrc.cjs", "./jest.setup.ts"],
+  "include": ["src", "tests", ".eslintrc.cjs", "./jest.setup.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
