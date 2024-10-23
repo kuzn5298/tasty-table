@@ -1,8 +1,7 @@
 import userEvent from '@testing-library/user-event';
 import { renderWithProviders } from '@tests/helpers'; // Убедись, что этот хелпер настроен правильно
 import { AppRoute } from '@/constants';
-import { mockCartMealsMap } from '@tests/mocks';
-import { selectCartCount } from '@/store';
+import { CartMeal } from '@/store';
 import Header from './Header';
 
 jest.mock('@/components/icons', () => ({
@@ -23,14 +22,35 @@ describe('<Button />', () => {
   });
 
   it('should show cart count when cart is not empty', () => {
-    const { container, store } = renderWithProviders(<Header />, {
-      storeOptions: { preloadedState: { cart: mockCartMealsMap } },
+    const mockMeal1: CartMeal = {
+      id: '1',
+      name: 'Pizza',
+      img: 'image-url',
+      price: 12,
+      count: 2,
+    };
+
+    const mockMeal2: CartMeal = {
+      id: '2',
+      name: 'Burger',
+      img: 'image-url',
+      price: 8,
+      count: 3,
+    };
+
+    const { container } = renderWithProviders(<Header />, {
+      storeOptions: {
+        preloadedState: {
+          cart: {
+            [mockMeal1.id]: mockMeal1,
+            [mockMeal2.id]: mockMeal2,
+          },
+        },
+      },
     });
 
-    const count = selectCartCount(store.getState());
-
     expect(container.querySelector('.cartBadge')?.textContent).toBe(
-      String(count)
+      String(2 + 3)
     );
   });
 
